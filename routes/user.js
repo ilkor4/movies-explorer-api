@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const auth = require('../middlewares/auth');
-const { regex } = require('../utils/constants');
 
 const {
   signup,
@@ -18,10 +17,20 @@ router.post('/signup', celebrate({
     email: Joi.string().required().email(),
   }),
 }), signup);
-router.post('/signin', signin);
+router.post('/signin', celebrate({
+  body: Joi.object().keys({
+    password: Joi.string().required(),
+    email: Joi.string().required().email(),
+  }),
+}), signin);
 router.post('/signout', signout);
 
 router.get('/users/me', auth, getCurrentUser);
-router.patch('/users/me', auth, updateCurrentUser);
+router.patch('/users/me', celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
+  }),
+}), auth, updateCurrentUser);
 
 module.exports = router;

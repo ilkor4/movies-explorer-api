@@ -8,6 +8,7 @@ const { errors } = require('celebrate');
 
 const { userRouter, movieRouter } = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const corsRequest = require('./middlewares/corsRequest');
 
 const NotFoundError = require('./errors/not-found-err');
 const globalErrorsHandler = require('./middlewares/globalErrorsHandler');
@@ -22,6 +23,8 @@ app.use(express.json());
 app.use(cookeyParser());
 
 app.use(requestLogger);
+
+app.use(corsRequest);
 
 app.use('/', userRouter);
 app.use('/', movieRouter);
