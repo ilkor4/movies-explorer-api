@@ -23,7 +23,7 @@ router.post('/signin', celebrate({
     email: Joi.string().required().email(),
   }),
 }), signin);
-router.post('/signout', signout);
+router.get('/signout', signout);
 
 router.get('/users/me', auth, getCurrentUser);
 router.patch('/users/me', celebrate({
