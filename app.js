@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { mongoURL } = require('./utils/constants');
 
-const { userRouter, movieRouter } = require('./routes/index');
+const rootRoter = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const limiter = require('./middlewares/limiter');
 const corsRequest = require('./middlewares/corsRequest');
@@ -31,8 +31,7 @@ app.use(helmet());
 app.use(limiter);
 app.use(corsRequest);
 
-app.use('/', userRouter);
-app.use('/', movieRouter);
+app.use('/', rootRoter);
 app.use('*', auth, (req, res, next) => {
   next(new NotFoundError('Ошибка 404. Данного ресурса не существует.'));
 });
