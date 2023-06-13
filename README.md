@@ -31,6 +31,13 @@
 
 ________________________________
 
-<a href="https://github.com/ilkor4/movies-explorer-api.git" target="_blank">Сcылка на репозиторий</a>
 
-## Ссылки на проект
+ ## Ссылки на проект
+
+ - IP 158.160.65.230
+
+ - <a href="https://github.com/ilkor4/movies-explorer-api.git" target="_blank">Сcылка на репозиторий</a>
+
+ - Frontend https://ilkor.student.nomoredomains.rocks
+
+ - Backend https://api.ilkor.students.nomoredomains.rocks
