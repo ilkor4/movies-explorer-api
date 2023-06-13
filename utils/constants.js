@@ -7,10 +7,16 @@ const allowedCors = [
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
+const mongoURL = 'mongodb://127.0.0.1:27017/bitfilmsdb';
+
+const jwtSignature = 'some-secret-key';
+
 const regex = /^https?:\/\/(www\.)?[-._~:/?#@!$[&'()*+,;=*a-z0-9]/;
 
 module.exports = {
   allowedCors,
   DEFAULT_ALLOWED_METHODS,
   regex,
+  mongoURL,
+  jwtSignature,
 };

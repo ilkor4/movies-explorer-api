@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user.id })
     .populate('owner')
     .then((movies) => res.send(movies))
     .catch(next);
@@ -60,8 +60,5 @@ module.exports.deleteMovie = (req, res, next) => {
           .catch(next);
       } else next(new ForbiddenError('Доступ запрещён.'));
     })
-    .catch((err) => {
-      if (err.name === 'ValidationError') next(new CodeError('Неверно передан id'));
-      else next(err);
-    });
+    .catch(next);
 };

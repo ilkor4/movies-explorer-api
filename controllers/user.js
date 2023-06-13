@@ -4,6 +4,7 @@ const User = require('../models/user');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
 
+const { jwtSignature } = require('../utils/constants');
 const CodeError = require('../errors/code-err');
 const NotFoundError = require('../errors/not-found-err');
 const ConflictError = require('../errors/conflict-err');
@@ -32,7 +33,7 @@ module.exports.signin = (req, res, next) => {
 
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = JWT.sign({ id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'some-secret-key', { expiresIn: '7d' });
+      const token = JWT.sign({ id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : jwtSignature, { expiresIn: '7d' });
 
       res.cookie('jwt', token, {
         httpOnly: true,
@@ -75,7 +76,7 @@ module.exports.updateCurrentUser = (req, res, next) => {
       else res.send(user);
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new CodeError('Переданы некорректные данные при обновлении профиля.'));
+      if (err.code === 11000) next(new ConflictError('Пользователь с таким email уже создан.'));
       else next(err);
     });
 };
