@@ -1,5 +1,4 @@
 # movies-explorer-api
-# Проект Movies бэкенд
 
 ## Основная функциональность:
 <ul>
@@ -35,9 +34,3 @@ ________________________________
 <a href="https://github.com/ilkor4/movies-explorer-api.git" target="_blank">Сcылка на репозиторий</a>
 
 ## Ссылки на проект
-
-IP 84.201.160.74
-
-Frontend https://ilkor.student.nomoredomains.rocks
-
-Backend https://api.ilkor.students.nomoredomains.rocks
